@@ -1,0 +1,22 @@
+.stats-wrapper {
+    display: flex;
+}
+
+.stat {
+    width: 25%;
+    box-shadow: 0px 0px 30px 0px rgba(41, 44, 28, 0.085);
+    padding: 0 10px;
+}
+
+.stat-container {
+    background-color: var(--main-color-desarutated);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+    border-radius: 6px;
+}
+
+.stat-number {
+    margin-bottom: 5px;
+}
