@@ -6,10 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.event-title {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .add-button {

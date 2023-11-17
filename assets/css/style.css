@@ -17,7 +17,7 @@
 }
 
 .sidebar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
@@ -25,6 +25,10 @@
     background-color: #16151A;
     padding: 0.4rem 0.8rem;
     transition: all 0.5s ease;
+}
+
+.sidebar-sticky {
+    position: sticky;   
 }
 
 .sidebar.active ~ .main-content {
@@ -183,7 +187,7 @@
 }
 
 .container-path {
-    border-bottom: 1px solid #f8f4f4;
+    border-bottom: 1px solid #f0ecec;
     padding: 1rem;
 }
 
