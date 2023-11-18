@@ -81,10 +81,10 @@
         </div>
         <div class="container-main">
             <div class="table-wrapper">
-                <div class="table-header">
+                <div class="table-header"></div>
                     <h3 class="event-title">Speaker details</h3>
                     <button class="add-button">
-                    <a href="/build/pages/pages-add/speakers-add.html">
+                    <a href="speakers-add.php">
                             Add speaker
                         </a>
                     </button>
@@ -122,7 +122,7 @@
                                             echo "<td>";
                                                     echo "<i class='fa-solid fa-ellipsis dropdown-button' onclick='toggleDropdown(this)'></i>";
                                                         echo "<div class='dropdown'>";
-                                                            echo "<a href=#" . $row->ID . ">Modify</a>";   
+                                                            echo "<a href='speakers-modify.php?ID=" . $row->ID . "'>Modify</a>";   
                                                             echo "<a href='speakers-delete.php?ID=" . $row->ID . "'>Delete</a>";
                                                         echo "</div>";
                                             echo "</td>";

@@ -1,3 +1,7 @@
+.form-wrapper {
+    padding: 0 30px;
+}
+
 .back-button {
     display: flex;
     flex-direction: row;
@@ -34,11 +38,41 @@
     background-color: var(--main-color-saturated);
 }
 
-.form-wrapper {
-    /* padding: 20px; */
+.form-body {
+    background: var(--background-third);
+    border-radius: 6px;
+    padding: 20px;
+    width: 700px;
+    margin: auto;
 }
 
-.form {
+form {
     display: flex;
     flex-direction: column;
+    gap: 40px;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.label input {
+    width: 100%;
+    color: rgb(36, 35, 42);
+    font-size: 16px;
+    line-height: 20px;
+    min-height: 28px;
+    border-radius: 4px;
+    padding: 8px 16px;
+    border: 2px solid var(--table-color);
+    /* box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px; */
+    background: rgb(251, 251, 251);
+    transition: all 0.1s ease 0s;
+}
+
+.label input:focus {
+    /* border: transparent; */
+    outline-color: var(--main-color);
 }

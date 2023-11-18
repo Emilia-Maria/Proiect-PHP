@@ -2,32 +2,41 @@
     include("../../src/conectare.php");
     $error='';
 
-    if (isset($_POST['submit']))
-    {
-        $Name = htmlentities($_POST['Name'], ENT_QUOTES);
-        $Type = "Partner";
-        $Details = htmlentities($_POST['Details'], ENT_QUOTES);
-        if ($Name == '' || $Details == '')
+    if (!empty($_POST['ID']))
+    { 
+        if (isset($_POST['submit']))
         {
-            $error = 'ERROR: Campuri goale!';
-        } 
-        else 
-        {
-            if ($stmt = $mysqli->prepare("INSERT INTO partnerssponsors (Name, Type, Details) VALUES (?, ?, ?)"))
+            if (is_numeric($_POST['ID']))
             {
-                $stmt->bind_param("sss", $Name, $Type, $Details);
-                $stmt->execute();
-                $stmt->close();
+                $ID = $_POST['ID'];
+                $Name = htmlentities($_POST['Name'], ENT_QUOTES);
+                $Details = htmlentities($_POST['Details'], ENT_QUOTES);
+                if ($Name == '' || $Details == '')
+                {
+                    echo "<div> ERROR: Completati campurile obligatorii!</div>";
+                }
+                else
+                {
+                    if ($stmt = $mysqli->prepare("UPDATE partnerssponsors SET Name = ?, Details = ? WHERE ID='" . $ID . "'"))
+                    {
+                        $stmt->bind_param("ss", $Name, $Details);
+                        $stmt->execute();
+                        $stmt->close();
+                        header("Location: partners.php");
+                    }
+                    else
+                    {
+                        echo "ERROR: nu se poate executa update.";
+                    }
+                }
             }
             else
             {
-                echo "ERROR: Nu se poate executa insert.";
+                echo "id incorect!";
             }
+             
         }
-        header("Location: partners.php");
     }
-
-    $mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +44,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event dashboard</title>
+    <title>Partner dashboard</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
@@ -128,18 +137,35 @@
                     <?php 
                         if ($error != '') 
                         {
-                            echo "<div style='padding:4px; border:1px solid red; color:red'>" . $error . "</div>";
+                            echo "<div style='padding:4px; border:1px solid red; color:red'>" . $error."</div>";
                         } 
                     ?>
                     <form id="myForm" class="form" action="" method="POST">
-                        <div class="label">
-                            <label>Partner name</label>
-                            <input type="text" name="Name" placeholder="Type partner name" required>
-                        </div>
-                        <div class="label">
-                            <label>Partner details</label>
-                            <input type="text" name="Details" placeholder="Type partner details" required>
-                        </div>
+                        <?php 
+                            if ($_GET['ID'] != '') 
+                            { 
+                                ?>
+                                <input type="hidden" name="ID" value="<?php echo $_GET['ID'];?>" />
+                                <?php
+                                    if ($result = $mysqli->query("SELECT * FROM partnerssponsors where ID = '" . $_GET['ID'] . "'"))
+                                    {
+                                        if ($result->num_rows > 0)
+                                        { 
+                                            $row = $result->fetch_object();
+                                            ?>
+                                                <div class="label">
+                                                    <label>Partner name</label>
+                                                    <input type="text" name="Name" placeholder="Type partner name" required value="<?php echo $row->Name;?>" >
+                                                </div>
+                                                <div class="label">
+                                                    <label>Partner details</label>
+                                                    <input type="text" name="Details" placeholder="Type partner details" required value="<?php echo $row->Details;?>"/>
+                                                </div>
+                                                <?php
+                                        }
+                                    }
+                                }
+                                ?>
                     </form>
                 </div>
         </div>

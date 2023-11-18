@@ -22,4 +22,9 @@ window.onclick = function (event) {
     });
   }
 };
-  
+
+
+// Add button outside form
+
+let addButton = document.querySelector('.add-button');
+addButton.addEventHandler('click', () => myForm.submit());

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event dashboard</title>
+    <title>Partner dashboard</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
@@ -85,7 +85,7 @@
                 <div class="table-header">
                     <h3 class="event-title">Partner details</h3>
                     <button class="add-button">
-                    <a href="partners-add.php">
+                        <a href="partners-add.php">
                             Add partner
                         </a>
                     </button>
@@ -94,7 +94,7 @@
                     <?php
                         include("../../src/conectare.php");
                         
-                        if($result = $mysqli->query("SELECT * FROM partnerssponsors WHERE type='Partener' ORDER BY id"))
+                        if($result = $mysqli->query("SELECT * FROM partnerssponsors WHERE type='Partner' ORDER BY id"))
                         {
                             if($result->num_rows > 0)
                             {
@@ -121,7 +121,7 @@
                                             echo "<td>";
                                                     echo "<i class='fa-solid fa-ellipsis dropdown-button' onclick='toggleDropdown(this)'></i>";
                                                         echo "<div class='dropdown'>";
-                                                            echo "<a href=#" . $row->ID . ">Modify</a>";   
+                                                            echo "<a href='partners-modify.php?ID=" . $row->ID . "'>Modify</a>";   
                                                             echo "<a href='partners-delete.php?ID=" . $row->ID . "'>Delete</a>";
                                                         echo "</div>";
                                             echo "</td>";
