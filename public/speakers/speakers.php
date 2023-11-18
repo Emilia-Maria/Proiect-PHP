@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event dashboard</title>
+    <title>Speakers dashboard</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
@@ -81,11 +81,11 @@
         </div>
         <div class="container-main">
             <div class="table-wrapper">
-                <div class="table-header"></div>
+                <div class="table-header">
                     <h3 class="event-title">Speaker details</h3>
                     <button class="add-button">
-                    <a href="speakers-add.php">
-                            Add speaker
+                        <a href="speakers-add.php">
+                            Create new
                         </a>
                     </button>
                 </div>

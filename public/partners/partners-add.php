@@ -35,7 +35,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event dashboard</title>
+    <title>Partner add</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
@@ -78,7 +78,7 @@
                     <span class="tooltip">Speakers</span>
                 </li>
                 <li>
-                    <a href="../partners/partners.php">
+                    <a href="partners.php">
                         <i class="bx bx-group"></i>
                         <span class="nav-item">Partners</span>
                     </a>
@@ -121,7 +121,7 @@
                 <header class="form-header">
                     <h3>Add new partner</h3>
                     <button class="add-button" type="submit" name="submit" form="myForm">
-                        Save partner
+                        Save
                     </button>
                 </header>
                 <div class="form-body">

@@ -86,7 +86,7 @@
                     <h3 class="event-title">Partner details</h3>
                     <button class="add-button">
                         <a href="partners-add.php">
-                            Add partner
+                            Create new
                         </a>
                     </button>
                 </div>

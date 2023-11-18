@@ -2,41 +2,31 @@
     include("../../src/conectare.php");
     $error='';
 
-    if (!empty($_POST['ID']))
-    { 
-        if (isset($_POST['submit']))
+    if (isset($_POST['submit']))
+    {
+        $Name = htmlentities($_POST['Name'], ENT_QUOTES);
+        $Details = htmlentities($_POST['Details'], ENT_QUOTES);
+        if ($Name == '' || $Details == '')
         {
-            if (is_numeric($_POST['ID']))
+            $error = 'ERROR: Campuri goale!';
+        } 
+        else 
+        {
+            if ($stmt = $mysqli->prepare("INSERT INTO speakers (Name, Details) VALUES (?, ?)"))
             {
-                $ID = $_POST['ID'];
-                $Name = htmlentities($_POST['Name'], ENT_QUOTES);
-                $Details = htmlentities($_POST['Details'], ENT_QUOTES);
-                if ($Name == '' || $Details == '')
-                {
-                    echo "<div> ERROR: Completati campurile obligatorii!</div>";
-                }
-                else
-                {
-                    if ($stmt = $mysqli->prepare("UPDATE partnerssponsors SET Name = ?, Details = ? WHERE ID='" . $ID . "'"))
-                    {
-                        $stmt->bind_param("ss", $Name, $Details);
-                        $stmt->execute();
-                        $stmt->close();
-                        header("Location: partners.php");
-                    }
-                    else
-                    {
-                        echo "ERROR: nu se poate executa update.";
-                    }
-                }
+                $stmt->bind_param("ss", $Name, $Details);
+                $stmt->execute();
+                $stmt->close();
             }
             else
             {
-                echo "id incorect!";
+                echo "ERROR: Nu se poate executa insert.";
             }
-             
         }
+        header("Location: speakers.php");
     }
+
+    $mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner modify</title>
+    <title>Speaker add</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
@@ -80,14 +70,14 @@
                     <span class="tooltip">Events</span>
                 </li>
                 <li>
-                    <a href="../speakers/speakers.php">
+                    <a href="speakers.php">
                         <i class="bx bxs-microphone-alt"></i>
                         <span class="nav-item">Speakers</span>
                     </a>
                     <span class="tooltip">Speakers</span>
                 </li>
                 <li>
-                    <a href="partners.php">
+                    <a href="../partners/partners.php">
                         <i class="bx bx-group"></i>
                         <span class="nav-item">Partners</span>
                     </a>
@@ -119,16 +109,16 @@
     
     <div class="main-content">
         <div class="container-path">
-            <p><span class="container-path-pages">Pages /</span> Modify partner</p>
+            <p><span class="container-path-pages">Pages /</span> Add speaker</p>
         </div>
         <div class="container-main">
-            <a href="partners.php" class="back-button">
+            <a href="speakers.php" class="back-button">
                 <i class="fa-solid fa-arrow-left-long"></i>
                 <h4>Back</h4>
             </a>
             <div class="form-wrapper">
                 <header class="form-header">
-                    <h3>Modify partner</h3>
+                    <h3>Add new speaker</h3>
                     <button class="add-button" type="submit" name="submit" form="myForm">
                         Save
                     </button>
@@ -137,35 +127,18 @@
                     <?php 
                         if ($error != '') 
                         {
-                            echo "<div style='padding:4px; border:1px solid red; color:red'>" . $error."</div>";
+                            echo "<div style='padding:4px; border:1px solid red; color:red'>" . $error . "</div>";
                         } 
                     ?>
                     <form id="myForm" class="form" action="" method="POST">
-                        <?php 
-                            if ($_GET['ID'] != '') 
-                            { 
-                                ?>
-                                <input type="hidden" name="ID" value="<?php echo $_GET['ID'];?>" />
-                                <?php
-                                    if ($result = $mysqli->query("SELECT * FROM partnerssponsors where ID = '" . $_GET['ID'] . "'"))
-                                    {
-                                        if ($result->num_rows > 0)
-                                        { 
-                                            $row = $result->fetch_object();
-                                            ?>
-                                                <div class="label">
-                                                    <label>Partner name</label>
-                                                    <input type="text" name="Name" placeholder="Type partner name" required value="<?php echo $row->Name;?>" >
-                                                </div>
-                                                <div class="label">
-                                                    <label>Partner details</label>
-                                                    <input type="text" name="Details" placeholder="Type partner details" required value="<?php echo $row->Details;?>"/>
-                                                </div>
-                                                <?php
-                                        }
-                                    }
-                                }
-                                ?>
+                        <div class="label">
+                            <label>Speaker name</label>
+                            <input type="text" name="Name" placeholder="Type speaker name" required>
+                        </div>
+                        <div class="label">
+                            <label>Speaker details</label>
+                            <input type="text" name="Details" placeholder="Type speaker details" required>
+                        </div>
                     </form>
                 </div>
         </div>

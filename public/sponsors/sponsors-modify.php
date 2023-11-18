@@ -22,7 +22,7 @@
                         $stmt->bind_param("ss", $Name, $Details);
                         $stmt->execute();
                         $stmt->close();
-                        header("Location: partners.php");
+                        header("Location: sponsors.php");
                     }
                     else
                     {
@@ -44,7 +44,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner modify</title>
+    <title>Sponsor modify</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
@@ -87,14 +87,14 @@
                     <span class="tooltip">Speakers</span>
                 </li>
                 <li>
-                    <a href="partners.php">
+                    <a href="../partners/partners.php">
                         <i class="bx bx-group"></i>
                         <span class="nav-item">Partners</span>
                     </a>
                     <span class="tooltip">Partners</span>
                 </li>
                 <li>
-                    <a href="../sponsors/sponsors.php">
+                    <a href="sponsors.php">
                         <i class="bx bxs-wallet"></i>
                         <span class="nav-item">Sponsors</span>
                     </a>
@@ -119,16 +119,16 @@
     
     <div class="main-content">
         <div class="container-path">
-            <p><span class="container-path-pages">Pages /</span> Modify partner</p>
+            <p><span class="container-path-pages">Pages /</span> Modify sponsor</p>
         </div>
         <div class="container-main">
-            <a href="partners.php" class="back-button">
+            <a href="sponsors.php" class="back-button">
                 <i class="fa-solid fa-arrow-left-long"></i>
                 <h4>Back</h4>
             </a>
             <div class="form-wrapper">
                 <header class="form-header">
-                    <h3>Modify partner</h3>
+                    <h3>Modify sponsor</h3>
                     <button class="add-button" type="submit" name="submit" form="myForm">
                         Save
                     </button>
@@ -154,12 +154,12 @@
                                             $row = $result->fetch_object();
                                             ?>
                                                 <div class="label">
-                                                    <label>Partner name</label>
-                                                    <input type="text" name="Name" placeholder="Type partner name" required value="<?php echo $row->Name;?>" >
+                                                    <label>Sponsor name</label>
+                                                    <input type="text" name="Name" placeholder="Type sponsor name" required value="<?php echo $row->Name;?>" >
                                                 </div>
                                                 <div class="label">
-                                                    <label>Partner details</label>
-                                                    <input type="text" name="Details" placeholder="Type partner details" required value="<?php echo $row->Details;?>"/>
+                                                    <label>Sponsor details</label>
+                                                    <input type="text" name="Details" placeholder="Type sponsor details" required value="<?php echo $row->Details;?>"/>
                                                 </div>
                                                 <?php
                                         }

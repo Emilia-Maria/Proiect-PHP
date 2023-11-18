@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event dashboard</title>
+    <title>Sponsors dashboard</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
@@ -85,8 +85,8 @@
                 <div class="table-header">
                     <h3 class="event-title">Sponsor details</h3>
                     <button class="add-button">
-                    <a href="/build/pages/pages-add/sponsors-add.html">
-                            Add sponsor
+                    <a href="sponsors-add.php">
+                            Create new
                         </a>
                     </button>
                 </div>
@@ -121,7 +121,7 @@
                                             echo "<td>";
                                                     echo "<i class='fa-solid fa-ellipsis dropdown-button' onclick='toggleDropdown(this)'></i>";
                                                         echo "<div class='dropdown'>";
-                                                            echo "<a href=#" . $row->ID . ">Modify</a>";   
+                                                            echo "<a href='sponsors-modify.php?ID=" . $row->ID . "'>Modify</a>";   
                                                             echo "<a href='sponsors-delete.php?ID=" . $row->ID . "'>Delete</a>";
                                                         echo "</div>";
                                             echo "</td>";
