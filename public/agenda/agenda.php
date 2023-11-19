@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
+    <link rel="stylesheet" href="../../assets/css/add-pages.css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +24,7 @@
             <i class="bx bx-menu" id="btn"></i>
         </div>
         <div class="bottom">
-            <ul class="nav-list">
+        <ul class="nav-list">
                 <li>
                     <a href="../index.html">
                         <i class="bx bxs-grid-alt"></i>
@@ -32,7 +33,7 @@
                     <span class="tooltip">Dashboard</span>
                 </li>
                 <li>
-                    <a href="events.php">
+                    <a href="../events/events.php">
                         <i class="bx bx-calendar-event"></i>
                         <span class="nav-item">Events</span>
                     </a>
@@ -78,23 +79,31 @@
     
     <div class="main-content">
         <div class="container-path">
-            <p><span class="container-path-pages">Pages /</span> Events</p>
+            <p><span class="container-path-pages">Pages /</span> Agenda</p>
         </div>
         <div class="container-main">
+            <a href="../events/events.php" class="back-button">
+                <i class="fa-solid fa-arrow-left-long"></i>
+                <h4>Back</h4>
+            </a>
             <div class="table-wrapper">
                 <div class="table-header">
-                    <h3 class="event-title">Event details</h3>
+                    <h3 class="event-title">Agenda details</h3>
                     <button class="add-button">
-                    <a href="events-add.php">
-                            Create new
-                        </a>
+                        <?php
+                        echo "<a href='agenda-add.php?EventID=" . $_GET['EventID'] . "'>";
+                        echo    "Create new";
+                        echo "</a>";
+                        ?>
                     </button>
                 </div>
                 <div>
                     <?php
                         include("../../src/conectare.php");
                         
-                        if($result = $mysqli->query("SELECT * FROM event ORDER BY id"))
+                        if($result = $mysqli->query("SELECT agenda.*, speakers.Name as speaker_name FROM agenda
+                        INNER JOIN speakers ON agenda.SpeakerID = speakers.ID
+                        WHERE agenda.EventID = " . $_GET['EventID'] . " ORDER BY ID"))
                         {
                             
                             if($result->num_rows > 0)
@@ -104,13 +113,10 @@
                                 "
                                     <thead>
                                         <tr>
-                                            <th>Event name</th>
-                                            <th>Date</th>
-                                            <th>Location</th>
-                                            <th>No tickets</th>
-                                            <th>Contact name</th>
-                                            <th>Contact phone</th>
-                                            <th>Contact email</th>
+                                            <th>Start time</th>
+                                            <th>End time</th>
+                                            <th>Activity details</th>
+                                            <th>Speaker</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -120,21 +126,15 @@
                                 {
                                     echo "<tbody>";
                                         echo "<tr>";
-                                            echo "<td>" . $row->Name . "</td>";
-                                            echo "<td>" . $row->Date . "</td>";
-                                            echo "<td>" . $row->Location . "</td>";
-                                            echo "<td>" . $row->Tickets . "</td>";
-                                            echo "<td>" . $row->ContactName . "</td>";
-                                            echo "<td>" . $row->ContactPhone . "</td>";
-                                            echo "<td>" . $row->ContactEmail . "</td>";
+                                            echo "<td>" . $row->StartTime . "</td>";
+                                            echo "<td>" . $row->EndTime . "</td>";
+                                            echo "<td>" . $row->ActivityDetails . "</td>";
+                                            echo "<td>" . $row->speaker_name . "</td>";
                                             echo "<td>";
                                                     echo "<i class='fa-solid fa-ellipsis dropdown-button' onclick='toggleDropdown(this)'></i>";
                                                         echo "<div class='dropdown'>";
-                                                            echo "<a href='../agenda/agenda.php?EventID=" . $row->ID . "'>Agenda</a>";
-                                                            echo "<a href='../partners/event-partners/event-partners.php?EventID=" . $row->ID . "'>Partners</a>";
-                                                            echo "<a href='../sponsors/event-sponsors/event-sponsors.php?EventID=" . $row->ID . "'>Sponsors</a>";
-                                                            echo "<a href='events-modify.php?ID=" . $row->ID . "'>Modify</a>";   
-                                                            echo "<a href='events-delete.php?ID=" . $row->ID . "'>Delete</a>";
+                                                            echo "<a href='agenda-modify.php?ID=" . $row->ID . "&EventID=" . $_GET['EventID'] . "'>Modify</a>"; 
+                                                            echo "<a href='agenda-delete.php?ID=" . $row->ID . "&EventID=" . $_GET['EventID'] . "'>Delete</a>";
                                                         echo "</div>";
                                             echo "</td>";
                                         echo "</tr>";

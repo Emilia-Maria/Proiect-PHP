@@ -38,12 +38,20 @@ th {
     height: 50px;
 }
 
+th:last-child {
+    width: 10%;
+}
+
 td {
     max-width: 200px;
     border-top: 0.5px solid var(--table-color);
     border-bottom: 0.5px solid var(--table-color);
     padding: 10px 20px;
     text-align: center;
+}
+
+td:last-child {
+    width: 10%;
 }
 
 /* ... */
