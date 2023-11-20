@@ -1,5 +1,5 @@
 <?php
     session_start();
     session_destroy();
-    header('Location: magazin.php');
+    header('Location: ../public/authentification.html');
 ?>

@@ -1,4 +1,12 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['loggedin'])) 
+    {
+        header('Location: ../error.html');
+    }
+?>
+
+<?php
     include("../../src/conectare.php");
     $error='';
 
@@ -39,7 +47,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event dashboard</title>
+    <title>Event add</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/pages.css">
     <link rel="stylesheet" href="../../assets/css/medias.css">
@@ -60,44 +68,44 @@
             <i class="bx bx-menu" id="btn"></i>
         </div>
         <div class="bottom">
-            <ul class="nav-list">
+        <ul class="nav-list">
                 <li>
-                    <a href="/build/index.html">
+                    <a href="../index.php">
                         <i class="bx bxs-grid-alt"></i>
                         <span class="nav-item">Dashboard</span>
                     </a>
                     <span class="tooltip">Dashboard</span>
                 </li>
                 <li>
-                    <a href="/build/pages/pages-front/events.html">
+                    <a href="events.php">
                         <i class="bx bx-calendar-event"></i>
                         <span class="nav-item">Events</span>
                     </a>
                     <span class="tooltip">Events</span>
                 </li>
                 <li>
-                    <a href="/build/pages/pages-front/speakers.html">
+                    <a href="../speakers/speakers.php">
                         <i class="bx bxs-microphone-alt"></i>
                         <span class="nav-item">Speakers</span>
                     </a>
                     <span class="tooltip">Speakers</span>
                 </li>
                 <li>
-                    <a href="/build/pages/pages-front/partners.html">
+                    <a href="../partners/partners.php">
                         <i class="bx bx-group"></i>
                         <span class="nav-item">Partners</span>
                     </a>
                     <span class="tooltip">Partners</span>
                 </li>
                 <li>
-                    <a href="/build/pages/pages-front/sponsors.html">
+                    <a href="../sponsors/sponsors.php">
                         <i class="bx bxs-wallet"></i>
                         <span class="nav-item">Sponsors</span>
                     </a>
                     <span class="tooltip">Sponsors</span>
                 </li>
                 <li>
-                    <a href="/build/pages/pages-front/users.html">
+                    <a href="../users/users.php">
                         <i class='bx bx-user'></i>
                         <span class="nav-item">Users</span>
                     </a>
@@ -105,8 +113,8 @@
                 </li>
             </ul>
             <div class="admin">
-                <a href="#">
-                    <p class="nav-item admin-name">Admin name</p>
+                <a href="../../src/logout.php">
+                    <p class="nav-item admin-name"><?=$_SESSION['name']?></p>
                     <i class='bx bx-log-out'></i>
                 </a>
             </div>

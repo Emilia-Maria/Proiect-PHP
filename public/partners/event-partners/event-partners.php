@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['loggedin'])) 
+    {
+        header('Location: ../../error.html');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +15,7 @@
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="../../../assets/css/pages.css">
     <link rel="stylesheet" href="../../../assets/css/medias.css">
+    <link rel="stylesheet" href="../../../assets/css/add-pages.css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +34,7 @@
         <div class="bottom">
         <ul class="nav-list">
                 <li>
-                    <a href="../index.html">
+                    <a href="../../index.php">
                         <i class="bx bxs-grid-alt"></i>
                         <span class="nav-item">Dashboard</span>
                     </a>
@@ -46,7 +55,7 @@
                     <span class="tooltip">Speakers</span>
                 </li>
                 <li>
-                    <a href="../../partners/partners.php">
+                    <a href="../partners.php">
                         <i class="bx bx-group"></i>
                         <span class="nav-item">Partners</span>
                     </a>
@@ -68,8 +77,8 @@
                 </li>
             </ul>
             <div class="admin">
-                <a href="#">
-                    <p class="nav-item admin-name">Admin name</p>
+                <a href="../../../src/logout.php">
+                    <p class="nav-item admin-name"><?=$_SESSION['name']?></p>
                     <i class='bx bx-log-out'></i>
                 </a>
             </div>
@@ -81,9 +90,13 @@
             <p><span class="container-path-pages">Pages /</span> Event partners</p>
         </div>
         <div class="container-main">
+            <a href="../partners.php" class="back-button">
+                <i class="fa-solid fa-arrow-left-long"></i>
+                <h4>Back</h4>
+            </a>
             <div class="table-wrapper">
                 <div class="table-header">
-                    <h3 class="event-title">Partners details</h3>
+                    <h3 class="event-title">Event partners details</h3>
                     <button class="add-button">
                         <?php
                         echo "<a href='event-partners-add.php?EventID=" . $_GET['EventID'] . "'>";

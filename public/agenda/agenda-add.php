@@ -1,4 +1,12 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['loggedin'])) 
+    {
+        header('Location: ../error.html');
+    }
+?>
+
+<?php
     include("../../src/conectare.php");
     $error='';
 
@@ -70,7 +78,7 @@
         <div class="bottom">
         <ul class="nav-list">
                 <li>
-                    <a href="../index.html">
+                    <a href="../index.php">
                         <i class="bx bxs-grid-alt"></i>
                         <span class="nav-item">Dashboard</span>
                     </a>
@@ -113,8 +121,8 @@
                 </li>
             </ul>
             <div class="admin">
-                <a href="#">
-                    <p class="nav-item admin-name">Admin name</p>
+                <a href="../../src/logout.php">
+                    <p class="nav-item admin-name"><?=$_SESSION['name']?></p>
                     <i class='bx bx-log-out'></i>
                 </a>
             </div>

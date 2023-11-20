@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['loggedin'])) 
+    {
+        header('Location: ../error.html');
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +34,7 @@
         <div class="bottom">
             <ul class="nav-list">
                 <li>
-                    <a href="index.html">
+                    <a href="index.php">
                         <i class="bx bxs-grid-alt"></i>
                         <span class="nav-item">Dashboard</span>
                     </a>
@@ -68,8 +77,8 @@
                 </li>
             </ul>
             <div class="admin">
-                <a href="#">
-                    <p class="nav-item admin-name">Admin name</p>
+                <a href="../src/logout.php">
+                    <p class="nav-item admin-name"><?=$_SESSION['name']?></p>
                     <i class='bx bx-log-out'></i>
                 </a>
             </div>
@@ -81,35 +90,7 @@
             <p><span class="container-path-pages">Pages /</span> Dashboard</p>
         </div>
         <div class="container-main">
-            <div class="stats-wrapper">
-                <div class="stat stat-col-4">
-                    <div class="stat-container">
-                        <div class="">
-                            <h3 class="stat-number">+50000</h3>
-                            <span class="stat-label">Users</span>
-                        </div>
-                        <i class='bx bxs-group'></i>
-                    </div>
-                </div>
-                <div class="stat stat-col-4">
-                    <div class="">
-                        <p>+50000</p>
-                        <p>Users</p>
-                    </div>
-                </div>
-                <div class="stat stat-col-4">
-                    <div class="">
-                        <p>+50000</p>
-                        <p>Users</p>
-                    </div>
-                </div>
-                <div class="stat stat-col-4">
-                    <div class="">
-                        <p>+50000</p>
-                        <p>Users</p>
-                    </div>
-                </div>
-            </div>
+            <p>Bine ai revenit, <?=$_SESSION['name']?>!</p>
         </div>
     </div>
     <script src="../assets/js/script.js"></script>

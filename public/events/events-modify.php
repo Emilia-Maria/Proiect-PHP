@@ -1,4 +1,12 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['loggedin'])) 
+    {
+        header('Location: ../error.html');
+    }
+?>
+
+<?php
     include("../../src/conectare.php");
     $error='';
 
@@ -114,8 +122,8 @@
                 </li>
             </ul>
             <div class="admin">
-                <a href="#">
-                    <p class="nav-item admin-name">Admin name</p>
+                <a href="../../src/logout.php">
+                    <p class="nav-item admin-name"><?=$_SESSION['name']?></p>
                     <i class='bx bx-log-out'></i>
                 </a>
             </div>
@@ -124,16 +132,16 @@
     
     <div class="main-content">
         <div class="container-path">
-            <p><span class="container-path-pages">Pages /</span> Modify partner</p>
+            <p><span class="container-path-pages">Pages /</span> Modify event</p>
         </div>
         <div class="container-main">
-            <a href="partners.php" class="back-button">
+            <a href="events.php" class="back-button">
                 <i class="fa-solid fa-arrow-left-long"></i>
                 <h4>Back</h4>
             </a>
             <div class="form-wrapper">
                 <header class="form-header">
-                    <h3>Modify partner</h3>
+                    <h3>Modify event</h3>
                     <button class="add-button" type="submit" name="submit" form="myForm">
                         Save
                     </button>
